@@ -1,0 +1,245 @@
+import { useRef, useState } from 'react';
+import { motion, useInView, type Variants } from 'framer-motion';
+import { Mail, Send, MapPin, Phone, Linkedin, Github, Twitter, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+
+const contactInfo = [
+    { icon: Mail, label: 'Email', value: 'lalith@example.com', href: 'mailto:lalith@example.com' },
+    { icon: MapPin, label: 'Location', value: 'India', href: '#' },
+    { icon: Phone, label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
+];
+
+const socialLinks = [
+    { icon: Github, href: 'https://github.com', label: 'GitHub', color: 'hover:text-white hover:border-white/30' },
+    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: 'hover:text-blue-400 hover:border-blue-400/30' },
+    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter', color: 'hover:text-sky-400 hover:border-sky-400/30' },
+];
+
+const containerVariants: Variants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1 } },
+};
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
+
+export default function Contact() {
+    const ref = useRef(null);
+    const inView = useInView(ref, { once: true, amount: 0.2 });
+
+    const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('loading');
+        // Simulate form submission
+        await new Promise(res => setTimeout(res, 1500));
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 4000);
+    };
+
+    return (
+        <section id="contact" className="py-24 relative bg-dark-800/20">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary-500/30 to-transparent" />
+                <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl" />
+                <div className="absolute top-1/4 right-0 w-56 h-56 bg-accent/5 rounded-full blur-3xl" />
+            </div>
+
+            <div className="max-w-6xl mx-auto px-6" ref={ref}>
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={inView ? 'visible' : 'hidden'}
+                >
+                    {/* Header */}
+                    <motion.div variants={itemVariants} className="mb-16 text-center">
+                        <div className="section-badge mx-auto w-fit">
+                            <Mail size={13} />
+                            contact.tsx
+                        </div>
+                        <h2 className="section-title">Get In Touch</h2>
+                        <div className="section-divider mx-auto" />
+                        <p className="text-dark-300 max-w-xl mx-auto">
+                            Have a project in mind? I'd love to hear from you. Let's build something great together.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid lg:grid-cols-5 gap-12">
+                        {/* Left info */}
+                        <motion.div variants={itemVariants} className="lg:col-span-2 space-y-8">
+                            <div className="glass-card p-8">
+                                <h3 className="text-xl font-bold text-white mb-6">Let's work together</h3>
+                                <p className="text-dark-300 text-sm leading-relaxed mb-8">
+                                    I'm currently available for freelance projects, full-time roles, and exciting collaborations. Whether it's a startup idea, a complex platform, or a redesign — I'm in.
+                                </p>
+
+                                {/* Contact info */}
+                                <div className="space-y-4 mb-8">
+                                    {contactInfo.map(({ icon: Icon, label, value, href }) => (
+                                        <a
+                                            key={label}
+                                            href={href}
+                                            className="flex items-center gap-4 p-3 rounded-xl hover:bg-dark-700/60 transition-colors group"
+                                        >
+                                            <div className="w-10 h-10 rounded-xl bg-primary-500/15 border border-primary-500/25 flex items-center justify-center flex-shrink-0">
+                                                <Icon size={16} className="text-primary-400" />
+                                            </div>
+                                            <div>
+                                                <p className="text-dark-400 text-xs">{label}</p>
+                                                <p className="text-white text-sm font-medium group-hover:text-primary-300 transition-colors">{value}</p>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+
+                                {/* Social links */}
+                                <div className="flex items-center gap-3">
+                                    <span className="text-dark-400 text-xs font-mono">// social</span>
+                                    {socialLinks.map(({ icon: Icon, href, label, color }) => (
+                                        <a
+                                            key={label}
+                                            href={href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={label}
+                                            className={`w-10 h-10 rounded-xl bg-dark-700 border border-dark-600 flex items-center justify-center text-dark-400 transition-all duration-200 ${color}`}
+                                        >
+                                            <Icon size={17} />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Availability card */}
+                            <div className="glass-card p-6">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <span className="glow-dot" />
+                                    <span className="text-white font-semibold text-sm">Available for hire</span>
+                                </div>
+                                <p className="text-dark-400 text-xs leading-relaxed">
+                                    Currently accepting new projects. Expected start:{' '}
+                                    <span className="text-primary-400 font-medium">Immediate</span>
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* Contact form */}
+                        <motion.div variants={itemVariants} className="lg:col-span-3">
+                            <div className="glass-card p-8">
+                                <h3 className="text-lg font-bold text-white mb-6">Send a Message</h3>
+
+                                <form onSubmit={handleSubmit} className="space-y-5" id="contact-form">
+                                    <div className="grid sm:grid-cols-2 gap-5">
+                                        {/* Name */}
+                                        <div className="space-y-2">
+                                            <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-name">
+                                                Name
+                                            </label>
+                                            <input
+                                                id="contact-name"
+                                                name="name"
+                                                type="text"
+                                                required
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                placeholder="Your name"
+                                                className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder-dark-400 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all"
+                                            />
+                                        </div>
+                                        {/* Email */}
+                                        <div className="space-y-2">
+                                            <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-email">
+                                                Email
+                                            </label>
+                                            <input
+                                                id="contact-email"
+                                                name="email"
+                                                type="email"
+                                                required
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                placeholder="your@email.com"
+                                                className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder-dark-400 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Subject */}
+                                    <div className="space-y-2">
+                                        <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-subject">
+                                            Subject
+                                        </label>
+                                        <select
+                                            id="contact-subject"
+                                            name="subject"
+                                            required
+                                            value={formData.subject}
+                                            onChange={handleChange}
+                                            className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all appearance-none"
+                                            style={{ color: formData.subject ? 'white' : '#64748b' }}
+                                        >
+                                            <option value="" disabled>Select a topic...</option>
+                                            <option value="freelance">Freelance Project</option>
+                                            <option value="fulltime">Full-time Opportunity</option>
+                                            <option value="collaboration">Open Source Collaboration</option>
+                                            <option value="other">Just say hi 👋</option>
+                                        </select>
+                                    </div>
+
+                                    {/* Message */}
+                                    <div className="space-y-2">
+                                        <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-message">
+                                            Message
+                                        </label>
+                                        <textarea
+                                            id="contact-message"
+                                            name="message"
+                                            required
+                                            rows={5}
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            placeholder="Tell me about your project..."
+                                            className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder-dark-400 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all resize-none"
+                                        />
+                                    </div>
+
+                                    {/* Submit */}
+                                    <motion.button
+                                        type="submit"
+                                        disabled={status === 'loading' || status === 'success'}
+                                        className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed"
+                                        whileHover={status === 'idle' ? { scale: 1.02 } : {}}
+                                        whileTap={status === 'idle' ? { scale: 0.98 } : {}}
+                                        id="contact-submit"
+                                    >
+                                        {status === 'idle' && <><Send size={18} /> Send Message</>}
+                                        {status === 'loading' && <><Loader size={18} className="animate-spin" /> Sending...</>}
+                                        {status === 'success' && <><CheckCircle size={18} /> Message Sent!</>}
+                                        {status === 'error' && <><AlertCircle size={18} /> Try Again</>}
+                                    </motion.button>
+
+                                    {status === 'success' && (
+                                        <motion.p
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="text-green-400 text-sm text-center"
+                                        >
+                                            🎉 Thanks! I'll get back to you within 24 hours.
+                                        </motion.p>
+                                    )}
+                                </form>
+                            </div>
+                        </motion.div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
