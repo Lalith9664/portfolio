@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Download, Sparkles, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Download, Sparkles, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import profilePic from './profile.png';
-import DotGrid from './DotGrid';
+import LightRays from './LightRays';
 
 // Typewriter hook — types through an array of strings sequentially
 function useTypewriter(words: string[], speed = 100, pause = 500) {
@@ -44,16 +44,16 @@ function useTypewriter(words: string[], speed = 100, pause = 500) {
 }
 
 const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/Lalith9664/', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/lalith-kumar-2a124b331/', label: 'LinkedIn' },
     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:lalith@example.com', label: 'Email' },
+    { icon: Mail, href: 'mailto:[EMAIL_ADDRESS]', label: 'Email' },
 ];
 
 const stats = [
-    { value: '2+', label: 'Years Exp.' },
-    { value: '15+', label: 'Projects' },
-    { value: '10+', label: 'Technologies' },
+    // { value: '2+', label: 'Years Exp.' },
+    // { value: '15+', label: 'Projects' },
+    // { value: '10+', label: 'Technologies' },
 ];
 // Sub-component that renders the typed name
 function NameTyped() {
@@ -80,25 +80,24 @@ export default function Hero() {
 
     return (
         <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Light Rays WebGL Effect */}
+            <LightRays
+                raysOrigin="left"
+                raysColor="#fcf9ffff"
+                raysSpeed={0.6}
+                lightSpread={0.2}
+                rayLength={3}
+                pulsating={false}
+                fadeDistance={1}
+                saturation={1}
+                followMouse={false}
+                mouseInfluence={0.1}
+                noiseAmount={0}
+                distortion={0}
+            />
             {/* Animated Background */}
             <div className="hero-bg" />
-
-            {/* Interactive dot grid */}
-            <div className="absolute inset-0 z-0 pointer-events-auto">
-                <DotGrid
-                    dotSize={5}
-                    gap={28}
-                    baseColor="#6366f1"
-                    activeColor="#06b6d4"
-                    proximity={140}
-                    speedTrigger={80}
-                    shockRadius={220}
-                    shockStrength={4}
-                    returnDuration={1.5}
-                />
-            </div>
-
-            <div className="absolute inset-0 grid-pattern opacity-40" />
+            <div className="absolute inset-0 grid-pattern opacity-100" />
 
             {/* Floating orbs */}
             <div className="absolute top-20 right-10 md:right-32 w-72 h-72 bg-primary-500/5 rounded-full blur-3xl float-anim" />
@@ -256,7 +255,7 @@ export default function Hero() {
                                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                             >
                                 <span className="text-lg">🐍</span>
-                                <span className="text-xs font-semibold text-white">Python Expert</span>
+                                <span className="text-xs font-semibold text-white">Python</span>
                             </motion.div>
                         </motion.div>
 
@@ -283,21 +282,6 @@ export default function Hero() {
                     </div>
                 </div>
 
-                {/* Scroll hint */}
-                <motion.div
-                    className="flex flex-col items-center gap-2 mt-16"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2 }}
-                >
-                    <span className="text-dark-400 text-sm font-mono">scroll</span>
-                    <motion.div
-                        animate={{ y: [0, 8, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <ArrowDown size={20} className="text-primary-400" />
-                    </motion.div>
-                </motion.div>
             </div>
         </section>
     );

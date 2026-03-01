@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 import { Layers } from 'lucide-react';
+import LightRays from './LightRays';
 
 const skillCategories = [
     {
@@ -13,7 +14,6 @@ const skillCategories = [
             { name: 'Tailwind CSS', icon: '💨', level: 90 },
             { name: 'Next.js', icon: '▲', level: 82 },
             { name: 'HTML & CSS', icon: '🌐', level: 95 },
-            { name: 'Framer Motion', icon: '🎭', level: 78 },
         ],
     },
     {
@@ -26,7 +26,6 @@ const skillCategories = [
             { name: 'Node.js', icon: '🟢', level: 82 },
             { name: 'Express.js', icon: '🚂', level: 80 },
             { name: 'REST APIs', icon: '🔗', level: 92 },
-            { name: 'PostgreSQL', icon: '🐘', level: 78 },
         ],
     },
     {
@@ -39,16 +38,10 @@ const skillCategories = [
             { name: 'Linux / Bash', icon: '🐧', level: 82 },
             { name: 'VS Code', icon: '💻', level: 95 },
             { name: 'Figma', icon: '🎯', level: 72 },
-            { name: 'Postman', icon: '📬', level: 88 },
         ],
     },
 ];
 
-const techBadges = [
-    'React', 'TypeScript', 'Python', 'FastAPI', 'Next.js', 'Node.js',
-    'Tailwind', 'PostgreSQL', 'Docker', 'Git', 'Linux', 'REST APIs',
-    'Framer Motion', 'Express', 'MongoDB', 'Redis',
-];
 
 const containerVariants: Variants = {
     hidden: {},
@@ -66,6 +59,21 @@ export default function Skills() {
 
     return (
         <section id="skills" className="py-24 relative bg-dark-800/30">
+            {/* Light Rays WebGL Effect */}
+            <LightRays
+                raysOrigin="left"
+                raysColor="#fcf9ffff"
+                raysSpeed={0.6}
+                lightSpread={0.2}
+                rayLength={3}
+                pulsating={false}
+                fadeDistance={1}
+                saturation={1}
+                followMouse={false}
+                mouseInfluence={0.1}
+                noiseAmount={0}
+                distortion={0}
+            />
             {/* bg decoration */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-primary-500/5 blur-3xl" />
@@ -92,18 +100,6 @@ export default function Skills() {
                     </motion.div>
 
                     {/* Scrolling tech badges ticker */}
-                    <motion.div variants={itemVariants} className="mb-16 overflow-hidden">
-                        <div className="flex gap-3 animate-[scroll_25s_linear_infinite] w-max">
-                            {[...techBadges, ...techBadges].map((tech, i) => (
-                                <span
-                                    key={i}
-                                    className="px-4 py-2 rounded-full bg-dark-700 border border-dark-600 text-dark-300 text-sm font-medium whitespace-nowrap hover:border-primary-500/40 hover:text-primary-300 transition-colors flex-shrink-0"
-                                >
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
-                    </motion.div>
 
                     {/* Skill Categories */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -150,14 +146,6 @@ export default function Skills() {
                             </motion.div>
                         ))}
                     </div>
-
-                    {/* Bottom note */}
-                    <motion.div variants={itemVariants} className="mt-12 text-center">
-                        <p className="text-dark-400 text-sm font-mono">
-              // Always learning, always growing. Next up:{' '}
-                            <span className="text-primary-400">Rust, WebAssembly, and AI/ML</span>
-                        </p>
-                    </motion.div>
                 </motion.div>
             </div>
 

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 import { Code2, ExternalLink, Github, Star, GitFork } from 'lucide-react';
+import LightRays from './LightRays';
 
 const projects = [
     {
@@ -96,6 +97,21 @@ export default function Projects() {
 
     return (
         <section id="projects" className="py-24 relative">
+            {/* Light Rays WebGL Effect */}
+            <LightRays
+                raysOrigin="left"
+                raysColor="#fcf9ffff"
+                raysSpeed={0.6}
+                lightSpread={0.2}
+                rayLength={3}
+                pulsating={false}
+                fadeDistance={1}
+                saturation={1}
+                followMouse={false}
+                mouseInfluence={0.1}
+                noiseAmount={0}
+                distortion={0}
+            />
             <div className="absolute top-1/2 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-6xl mx-auto px-6" ref={ref}>

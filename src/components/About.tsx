@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 import { User, MapPin, Coffee, Zap, BookOpen, HeartHandshake } from 'lucide-react';
+import LightRays from './LightRays';
 
 const highlights = [
     { icon: MapPin, label: 'Location', value: 'India' },
@@ -34,6 +35,21 @@ export default function About() {
 
     return (
         <section id="about" className="py-24 relative">
+            {/* Light Rays WebGL Effect */}
+            <LightRays
+                raysOrigin="left"
+                raysColor="#fcf9ffff"
+                raysSpeed={0.6}
+                lightSpread={0.2}
+                rayLength={3}
+                pulsating={false}
+                fadeDistance={1}
+                saturation={1}
+                followMouse={false}
+                mouseInfluence={0.1}
+                noiseAmount={0}
+                distortion={0}
+            />
             {/* Dot-grid BG accent */}
             <div className="absolute top-0 right-0 w-96 h-96 dot-grid opacity-40 pointer-events-none" />
 

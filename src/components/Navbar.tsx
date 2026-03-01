@@ -47,7 +47,9 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-glass py-3 shadow-2xl shadow-black/20' : 'py-5 bg-transparent'
+                className={`fixed z-50 transition-all duration-500 ${scrolled
+                    ? ' top-4 left-4 right-4 md:left-8 md:right-8 py-3'
+                    : 'top-0 left-0 right-0 py-5 bg-transparent'
                     }`}
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -77,8 +79,8 @@ export default function Navbar() {
                                 key={link.href}
                                 onClick={() => handleNavClick(link.href)}
                                 className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 cursor-pointer ${activeSection === link.href.replace('#', '')
-                                        ? 'text-white'
-                                        : 'text-dark-300 hover:text-white'
+                                    ? 'text-white'
+                                    : 'text-dark-300 hover:text-white'
                                     }`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -157,8 +159,8 @@ export default function Navbar() {
                                     key={link.href}
                                     onClick={() => handleNavClick(link.href)}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left text-base font-medium transition-colors ${activeSection === link.href.replace('#', '')
-                                            ? 'bg-primary-500/15 text-primary-300 border border-primary-500/25'
-                                            : 'text-dark-200 hover:bg-dark-700 hover:text-white'
+                                        ? 'bg-primary-500/15 text-primary-300 border border-primary-500/25'
+                                        : 'text-dark-200 hover:bg-dark-700 hover:text-white'
                                         }`}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}

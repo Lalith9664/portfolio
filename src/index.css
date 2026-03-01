@@ -100,7 +100,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
     transition: left 0.5s ease;
   }
 
@@ -211,13 +211,18 @@
 }
 
 @keyframes drift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(40px, 30px) rotate(10deg); }
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(40px, 30px) rotate(10deg);
+  }
 }
 
 /* Grid pattern */
 .grid-pattern {
-  background-image: 
+  background-image:
     linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -254,15 +259,30 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Floating animation */
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-15px) rotate(1deg); }
-  66% { transform: translateY(-8px) rotate(-1deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
 }
 
 .float-anim {
@@ -278,8 +298,15 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Skill bar animation */
@@ -299,20 +326,28 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   animation: shimmer 2s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-  to { left: 100%; }
+  to {
+    left: 100%;
+  }
 }
 
 /* Navbar blur */
 .navbar-glass {
-  background: rgba(2, 6, 23, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+  background: rgba(2, 6, 23, 0.80);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(99, 102, 241, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* Section divider */
@@ -336,6 +371,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

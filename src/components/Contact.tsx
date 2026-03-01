@@ -1,16 +1,17 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 import { Mail, Send, MapPin, Phone, Linkedin, Github, Twitter, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import LightRays from './LightRays';
 
 const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'lalith@example.com', href: 'mailto:lalith@example.com' },
+    { icon: Mail, label: 'Email', value: 'lalith8302@gmail.com', href: 'mailto:lalith8302@gmail.com' },
     { icon: MapPin, label: 'Location', value: 'India', href: '#' },
     { icon: Phone, label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
 ];
 
 const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub', color: 'hover:text-white hover:border-white/30' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: 'hover:text-blue-400 hover:border-blue-400/30' },
+    { icon: Github, href: 'https://github.com/Lalith9664/', label: 'GitHub', color: 'hover:text-white hover:border-white/30' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/lalith-kumar-2a124b331/', label: 'LinkedIn', color: 'hover:text-blue-400 hover:border-blue-400/30' },
     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter', color: 'hover:text-sky-400 hover:border-sky-400/30' },
 ];
 
@@ -37,15 +38,43 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
-        // Simulate form submission
-        await new Promise(res => setTimeout(res, 1500));
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setStatus('idle'), 4000);
+        try {
+            const res = await fetch('https://formspree.io/f/xeoqokwp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            if (res.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '' });
+                setTimeout(() => setStatus('idle'), 4000);
+            } else {
+                setStatus('error');
+                setTimeout(() => setStatus('idle'), 4000);
+            }
+        } catch {
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 4000);
+        }
     };
 
     return (
         <section id="contact" className="py-24 relative bg-dark-800/20">
+            {/* Light Rays WebGL Effect */}
+            <LightRays
+                raysOrigin="left"
+                raysColor="#fcf9ffff"
+                raysSpeed={0.6}
+                lightSpread={0.2}
+                rayLength={3}
+                pulsating={false}
+                fadeDistance={1}
+                saturation={1}
+                followMouse={false}
+                mouseInfluence={0.1}
+                noiseAmount={0}
+                distortion={0}
+            />
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary-500/30 to-transparent" />
                 <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl" />
@@ -116,18 +145,6 @@ export default function Contact() {
                                     ))}
                                 </div>
                             </div>
-
-                            {/* Availability card */}
-                            <div className="glass-card p-6">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <span className="glow-dot" />
-                                    <span className="text-white font-semibold text-sm">Available for hire</span>
-                                </div>
-                                <p className="text-dark-400 text-xs leading-relaxed">
-                                    Currently accepting new projects. Expected start:{' '}
-                                    <span className="text-primary-400 font-medium">Immediate</span>
-                                </p>
-                            </div>
                         </motion.div>
 
                         {/* Contact form */}
@@ -169,28 +186,6 @@ export default function Contact() {
                                                 className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder-dark-400 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all"
                                             />
                                         </div>
-                                    </div>
-
-                                    {/* Subject */}
-                                    <div className="space-y-2">
-                                        <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-subject">
-                                            Subject
-                                        </label>
-                                        <select
-                                            id="contact-subject"
-                                            name="subject"
-                                            required
-                                            value={formData.subject}
-                                            onChange={handleChange}
-                                            className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all appearance-none"
-                                            style={{ color: formData.subject ? 'white' : '#64748b' }}
-                                        >
-                                            <option value="" disabled>Select a topic...</option>
-                                            <option value="freelance">Freelance Project</option>
-                                            <option value="fulltime">Full-time Opportunity</option>
-                                            <option value="collaboration">Open Source Collaboration</option>
-                                            <option value="other">Just say hi 👋</option>
-                                        </select>
                                     </div>
 
                                     {/* Message */}
