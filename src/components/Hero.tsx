@@ -146,7 +146,7 @@ export default function Hero() {
                             className="flex items-center gap-3 mb-6"
                         >
                             <div className="h-px flex-1 max-w-12 bg-gradient-to-r from-primary-500 to-transparent" />
-                            <span className="text-primary-300 font-mono font-medium text-lg">Full Stack Developer</span>
+                            <span className="text-primary-300 font-mono font-medium text-lg">Frontend Developer</span>
                         </motion.div>
 
                         {/* Tagline */}
@@ -233,7 +233,7 @@ export default function Hero() {
                                 <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-dark-700 z-10">
                                     <img
                                         src={profilePic}
-                                        alt="Lalith Kumar - Full Stack Developer"
+                                        alt="Lalith Kumar - Frontend Developer"
                                         className="w-full h-full object-cover object-top"
                                     />
                                 </div>
