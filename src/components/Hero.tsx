@@ -47,7 +47,7 @@ const socialLinks = [
     { icon: Github, href: 'https://github.com/Lalith9664/', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/lalith-kumar-2a124b331/', label: 'LinkedIn' },
     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:[EMAIL_ADDRESS]', label: 'Email' },
+    { icon: Mail, href: 'lalith8302@gmail.com', label: 'Email' },
 ];
 
 const stats = [

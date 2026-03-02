@@ -90,7 +90,7 @@ export default function Skills() {
                     <motion.div variants={itemVariants} className="mb-16">
                         <div className="section-badge">
                             <Layers size={13} />
-                            skills.config.ts
+                            skills
                         </div>
                         <h2 className="section-title">Technical Skills</h2>
                         <div className="section-divider" />

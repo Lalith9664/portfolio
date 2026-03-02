@@ -124,7 +124,7 @@ export default function Projects() {
                     <motion.div variants={itemVariants} className="mb-16">
                         <div className="section-badge">
                             <Code2 size={13} />
-                            projects.json
+                            projects
                         </div>
                         <h2 className="section-title">Featured Work</h2>
                         <div className="section-divider" />
@@ -250,7 +250,7 @@ export default function Projects() {
                     {/* View All */}
                     <motion.div variants={itemVariants} className="text-center mt-12">
                         <a
-                            href="https://github.com"
+                            href="https://github.com/Lalith9664"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-secondary inline-flex"

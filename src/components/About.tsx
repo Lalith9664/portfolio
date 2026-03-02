@@ -63,7 +63,7 @@ export default function About() {
                     <motion.div variants={itemVariants} className="mb-16">
                         <div className="section-badge">
                             <User size={13} />
-                            about_me.json
+                            about_me
                         </div>
                         <h2 className="section-title">Who I Am</h2>
                         <div className="section-divider" />

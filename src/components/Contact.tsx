@@ -91,7 +91,7 @@ export default function Contact() {
                     <motion.div variants={itemVariants} className="mb-16 text-center">
                         <div className="section-badge mx-auto w-fit">
                             <Mail size={13} />
-                            contact.tsx
+                            contact
                         </div>
                         <h2 className="section-title">Get In Touch</h2>
                         <div className="section-divider mx-auto" />
