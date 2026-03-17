@@ -6,7 +6,7 @@ import LightRays from './LightRays';
 const contactInfo = [
     { icon: Mail, label: 'Email', value: 'lalith8302@gmail.com', href: 'mailto:lalith8302@gmail.com' },
     { icon: MapPin, label: 'Location', value: 'India', href: '#' },
-    { icon: Phone, label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
+    { icon: Phone, label: 'Phone', value: '+91 8778767644', href: 'tel:+918778767644' },
 ];
 
 const socialLinks = [
@@ -28,8 +28,9 @@ export default function Contact() {
     const ref = useRef(null);
     const inView = useInView(ref, { once: true, amount: 0.2 });
 
-    const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [errorMsg, setErrorMsg] = useState<string>('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,23 +39,39 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
+        setErrorMsg('');
         try {
-            const res = await fetch('https://formspree.io/f/xeoqokwp', {
+            const res = await fetch('http://localhost:8000/api/v1/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
                 body: JSON.stringify(formData),
             });
             if (res.ok) {
                 setStatus('success');
-                setFormData({ name: '', email: '', subject: '', message: '' });
+                setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
                 setTimeout(() => setStatus('idle'), 4000);
             } else {
+                // Parse error from FastAPI (422 validation errors or 4xx/5xx details)
+                let msg = 'Something went wrong. Please try again.';
+                try {
+                    const data = await res.json();
+                    if (Array.isArray(data?.detail)) {
+                        // Pydantic validation errors — pick the first one
+                        msg = data.detail.map((e: { msg: string }) =>
+                            e.msg.replace(/^Value error, /, '')
+                        ).join(' · ');
+                    } else if (typeof data?.detail === 'string') {
+                        msg = data.detail;
+                    }
+                } catch { /* use default msg */ }
+                setErrorMsg(msg);
                 setStatus('error');
-                setTimeout(() => setStatus('idle'), 4000);
+                setTimeout(() => { setStatus('idle'); setErrorMsg(''); }, 5000);
             }
         } catch {
+            setErrorMsg('Could not reach the server. Make sure the backend is running.');
             setStatus('error');
-            setTimeout(() => setStatus('idle'), 4000);
+            setTimeout(() => { setStatus('idle'); setErrorMsg(''); }, 5000);
         }
     };
 
@@ -188,6 +205,40 @@ export default function Contact() {
                                         </div>
                                     </div>
 
+                                    {/* Phone + Subject row */}
+                                    <div className="grid sm:grid-cols-2 gap-5">
+                                        {/* Phone */}
+                                        <div className="space-y-2">
+                                            <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-phone">
+                                                Phone <span className="text-dark-500 normal-case font-normal">(optional)</span>
+                                            </label>
+                                            <input
+                                                id="contact-phone"
+                                                name="phone"
+                                                type="tel"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                placeholder="+91 98765 43210"
+                                                className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder-dark-400 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all"
+                                            />
+                                        </div>
+                                        {/* Subject */}
+                                        <div className="space-y-2">
+                                            <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-subject">
+                                                Subject
+                                            </label>
+                                            <input
+                                                id="contact-subject"
+                                                name="subject"
+                                                type="text"
+                                                value={formData.subject}
+                                                onChange={handleChange}
+                                                placeholder="What's this about?"
+                                                className="w-full bg-dark-800/60 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder-dark-400 text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 transition-all"
+                                            />
+                                        </div>
+                                    </div>
+
                                     {/* Message */}
                                     <div className="space-y-2">
                                         <label className="text-dark-300 text-xs font-medium uppercase tracking-wider" htmlFor="contact-message">
@@ -219,6 +270,16 @@ export default function Contact() {
                                         {status === 'success' && <><CheckCircle size={18} /> Message Sent!</>}
                                         {status === 'error' && <><AlertCircle size={18} /> Try Again</>}
                                     </motion.button>
+
+                                    {status === 'error' && errorMsg && (
+                                        <motion.p
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="text-red-400 text-sm text-center"
+                                        >
+                                            ⚠️ {errorMsg}
+                                        </motion.p>
+                                    )}
 
                                     {status === 'success' && (
                                         <motion.p
