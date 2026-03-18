@@ -47,10 +47,8 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                className={`fixed z-50 transition-all duration-500 ${scrolled
-                    ? ' top-4 left-4 right-4 md:left-8 md:right-8 py-3'
-                    : 'top-0 left-0 right-0 py-5 bg-transparent'
-                    }`}
+                className="fixed z-50 transition-all duration-500 top-0 left-0 right-0 py-5"
+                style={scrolled ? { background: 'transparent', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' } : { background: 'transparent' }}
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
