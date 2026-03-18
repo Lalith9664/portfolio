@@ -99,7 +99,7 @@ class AboutInfo(BaseModel):
     email: str
     github: str
     linkedin: str
-    twitter: str
+    x_social: str
 
 
 class HealthResponse(BaseModel):

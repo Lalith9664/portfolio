@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
-import { Mail, Send, MapPin, Phone, Linkedin, Github, Twitter, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { Mail, Send, MapPin, Phone, Linkedin, Github, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import XIcon from './icons/XIcon';
 import LightRays from './LightRays';
 
 const contactInfo = [
@@ -12,7 +13,7 @@ const contactInfo = [
 const socialLinks = [
     { icon: Github, href: 'https://github.com/Lalith9664/', label: 'GitHub', color: 'hover:text-white hover:border-white/30' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/lalith-kumar-2a124b331/', label: 'LinkedIn', color: 'hover:text-blue-400 hover:border-blue-400/30' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter', color: 'hover:text-sky-400 hover:border-sky-400/30' },
+    { icon: XIcon, href: 'https://x.com', label: 'X', color: 'hover:text-white hover:border-white/30' },
 ];
 
 const containerVariants: Variants = {

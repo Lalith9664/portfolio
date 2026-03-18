@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Sparkles, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Download, Sparkles, Github, Linkedin } from 'lucide-react';
+import XIcon from './icons/XIcon';
 import profilePic from './profile.png';
 import LightRays from './LightRays';
 
@@ -46,8 +47,7 @@ function useTypewriter(words: string[], speed = 100, pause = 500) {
 const socialLinks = [
     { icon: Github, href: 'https://github.com/Lalith9664/', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/lalith-kumar-2a124b331/', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Mail, href: 'lalith8302@gmail.com', label: 'Email' },
+    { icon: XIcon, href: 'https://x.com', label: 'X' },
 ];
 
 const stats = [

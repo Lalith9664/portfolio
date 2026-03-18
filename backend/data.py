@@ -29,7 +29,7 @@ ABOUT: AboutInfo = AboutInfo(
     email="lalith8302@gmail.com",
     github="https://github.com/Lalith9664/",
     linkedin="https://www.linkedin.com/in/lalith-kumar-2a124b331/",
-    twitter="https://twitter.com",
+    x_social="https://x.com",
 )
 
 # ─────────────────────────────────────────
