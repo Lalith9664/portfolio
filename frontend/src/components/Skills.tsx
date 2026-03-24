@@ -100,6 +100,23 @@ export default function Skills() {
                     </motion.div>
 
                     {/* Scrolling tech badges ticker */}
+                    <div className="overflow-hidden whitespace-nowrap mb-20 fade-x py-4 mt-8">
+                        <motion.div
+                            className="flex gap-6 w-max"
+                            animate={{ x: '-50%' }}
+                            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                        >
+                            {[...Array(2)].map((_, i) => (
+                                <div key={i} className="flex gap-6 pr-6">
+                                    {['React.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Python', 'FastAPI', 'PostgreSQL', 'Docker', 'Next.js', 'Redis', 'AWS', 'GraphQL', 'Linux'].map((tech) => (
+                                        <div key={tech} className="px-6 py-2.5 glass-card rounded-full text-white/90 text-sm font-medium flex items-center justify-center border border-dark-600/50 hover:border-primary-500/60 hover:text-primary-400 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)] transition-all duration-300 cursor-default">
+                                            {tech}
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
 
                     {/* Skill Categories */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -109,18 +109,19 @@ export default function About() {
                             {/* Highlights Grid */}
                             <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4">
                                 {highlights.map(({ icon: Icon, label, value }) => (
-                                    <div
+                                    <motion.div
                                         key={label}
-                                        className="glass-card p-4 flex items-center gap-3"
+                                        className="glass-card p-4 flex items-center gap-3 cursor-pointer hover:border-primary-500/30"
+                                        whileHover={{ y: -5, scale: 1.05 }}
                                     >
                                         <div className="w-9 h-9 rounded-lg bg-primary-500/15 border border-primary-500/25 flex items-center justify-center flex-shrink-0">
-                                            <Icon size={16} className="text-primary-400" />
+                                            <Icon size={16} className="text-primary-400 group-hover:text-primary-300 transition-colors" />
                                         </div>
                                         <div>
                                             <p className="text-dark-400 text-xs">{label}</p>
                                             <p className="text-white text-sm font-medium">{value}</p>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </motion.div>
                         </div>

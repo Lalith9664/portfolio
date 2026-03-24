@@ -50,7 +50,7 @@ const socialLinks = [
     { icon: XIcon, href: 'https://x.com', label: 'X' },
 ];
 
-const stats = [
+const stats: { value: string; label: string }[] = [
     // { value: '2+', label: 'Years Exp.' },
     // { value: '15+', label: 'Projects' },
     // { value: '10+', label: 'Technologies' },
@@ -112,7 +112,8 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="section-badge w-fit mb-6"
+                            className="section-badge w-fit mb-6 hover:border-primary-500/50 hover:bg-primary-500/10 cursor-default transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
                         >
                             <span className="glow-dot" />
                             Available for opportunities
@@ -222,8 +223,9 @@ export default function Hero() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
+                            whileHover={{ scale: 1.05, rotate: 2 }}
                             transition={{ delay: 0.3, type: 'spring', stiffness: 100 }}
-                            className="relative float-anim"
+                            className="relative float-anim cursor-pointer"
                         >
                             {/* Outer glow ring */}
                             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-500 via-accent to-violet-500 blur-xl opacity-30 scale-110" />

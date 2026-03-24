@@ -139,7 +139,9 @@ export default function Projects() {
                             <motion.div
                                 key={project.title}
                                 variants={itemVariants}
-                                className="glass-card overflow-hidden group"
+                                className="glass-card overflow-hidden group cursor-pointer"
+                                whileHover={{ y: -8, scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 {/* Project header gradient */}
                                 <div className={`h-2 bg-gradient-to-r ${project.color}`} />
@@ -215,7 +217,9 @@ export default function Projects() {
                             <motion.div
                                 key={project.title}
                                 variants={itemVariants}
-                                className="glass-card p-5 group flex flex-col"
+                                className="glass-card p-5 group flex flex-col cursor-pointer"
+                                whileHover={{ y: -5, scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-2xl">{project.image}</span>
